@@ -65,7 +65,6 @@ public class BasicDocument extends Document
 		int syllablesCount = 0;
 		
 		for(String word:words) {
-			System.out.print(countSyllables(word) + " ");
 			syllablesCount += countSyllables(word);
 		}
 		
