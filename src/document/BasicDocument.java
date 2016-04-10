@@ -63,7 +63,15 @@ public class BasicDocument extends Document
 	    //TODO: Implement this method.  See the Module 1 support videos 
         // if you need help.
 		
-        return 0;
+		List<String> words = getTokens("[a-zA-Z]+");
+		int syllablesCount = 0;
+		
+		for(String word:words) {
+			System.out.print(countSyllables(word) + " ");
+			syllablesCount += countSyllables(word);
+		}
+		
+        return syllablesCount;
 	}
 	
 	
@@ -87,7 +95,6 @@ public class BasicDocument extends Document
 		testCase(new BasicDocument("Sentences?!"), 3, 1, 1);
 		testCase(new BasicDocument("Lorem ipsum dolor sit amet, qui ex choro quodsi moderatius, nam dolores explicari forensibus ad."),
 		         32, 15, 1);
-		
 		
 	}
 	
