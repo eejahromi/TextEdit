@@ -50,10 +50,30 @@ public abstract class Document {
 	// next week when we implement the EfficientDocument class.
 	protected int countSyllables(String word)
 	{
-		// TODO: Implement this method so that you can call it from the 
-	    // getNumSyllables method in BasicDocument (module 1) and 
-	    // EfficientDocument (module 2).
-	    return 0;
+		int syllablesCount = 0;
+		boolean newSyllable = true;
+		String vowels = "eaiouy";
+		char wordChar[] = word.toLowerCase().toCharArray();
+		
+		for (int i = 0; i < wordChar.length; i++) {
+			// lone 'e' at the end and no other syllables in the word
+			if (i == wordChar.length-1 && wordChar[i] == 'e' 
+		    		&& newSyllable && syllablesCount > 0) {
+		    	syllablesCount--;
+            }
+			// encountered a vowel
+		    if (newSyllable && vowels.indexOf(wordChar[i]) >= 0) {
+				newSyllable = false;
+				syllablesCount++;
+			}
+		    
+		    // not a vowel
+			else if (vowels.indexOf(wordChar[i]) < 0) {
+				newSyllable = true;
+			}
+		}
+		
+	    return syllablesCount;
 	}
 	
 	/** A method for testing
@@ -116,8 +136,7 @@ public abstract class Document {
 	/** return the Flesch readability score of this document */
 	public double getFleschScore()
 	{
-	    // TODO: Implement this method
-	    return 0.0;
+	    return 206.835 - (1.015 * ((double)getNumWords()/getNumSentences())) - (84.6 * ((double)getNumSyllables()/getNumWords()));
 	}
 	
 	
